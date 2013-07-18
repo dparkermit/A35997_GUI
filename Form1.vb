@@ -25,6 +25,9 @@ Public Class Form1
 
     Public Const CMD_RESET As Byte = &H36
 
+    Public Const CMD_SET_PID As Byte = &H38
+
+
     ' Ram Locations
     Public Const RAM_READ_STATE As Byte = &H1
     Public Const RAM_READ_VERSION As Byte = &H2
@@ -60,6 +63,13 @@ Public Class Form1
     Public Const RAM_READ_GUI_DEBUG_2 As Byte = &H54
     Public Const RAM_READ_GUI_DEBUG_3 As Byte = &H55
     Public Const RAM_READ_GUI_DEBUG_4 As Byte = &H56
+
+
+    Public Const RAM_READ_PID_P_COEF As Byte = &H60
+    Public Const RAM_READ_PID_I_COEF As Byte = &H61
+    Public Const RAM_READ_PID_D_COEF As Byte = &H62
+
+
 
 
 
@@ -707,5 +717,75 @@ Public Class Form1
         Else
             MsgBox("Reset Command Failed")
         End If
+    End Sub
+
+    Private Sub ReadPID()
+        If SendAndValidateCommand(CMD_READ_RAM_VALUE, RAM_READ_PID_P_COEF, 0, 0) = True Then
+            TextBoxPCoeff.Text = Math.Round(ReturnData * 2 / 2 ^ 16, 5)
+        Else
+            TextBoxPCoeff.Text = "error"
+        End If
+
+        If SendAndValidateCommand(CMD_READ_RAM_VALUE, RAM_READ_PID_I_COEF, 0, 0) = True Then
+            TextBoxICoeff.Text = Math.Round(ReturnData * 2 / 2 ^ 16, 5)
+        Else
+            TextBoxICoeff.Text = "error"
+        End If
+
+        If SendAndValidateCommand(CMD_READ_RAM_VALUE, RAM_READ_PID_D_COEF, 0, 0) = True Then
+            TextBoxDCoeff.Text = Math.Round(ReturnData * 2 / 2 ^ 16, 5)
+        Else
+            TextBoxDCoeff.Text = "error"
+        End If
+    End Sub
+
+    Private Sub ButtonReadPID_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonReadPID.Click
+        ReadPID()
+    End Sub
+
+    Private Sub ButtonWritePID_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonWritePID.Click
+        Dim data As Single
+        Dim ProgramWord As UInt16
+        Dim ProgramHB As Byte
+        Dim ProgramLB As Byte
+
+        data = TextBoxPCoeff.Text
+        If data > 0.99 Then
+            data = 0.99
+        End If
+        If data < 0 Then
+            data = 0
+        End If
+        ProgramWord = (data * 2 ^ 15)
+        ProgramHB = Int(ProgramWord / 256)
+        ProgramLB = ProgramWord Mod 256
+        SendAndValidateCommand(CMD_SET_PID, RAM_READ_PID_P_COEF, ProgramHB, ProgramLB)
+
+        data = TextBoxICoeff.Text
+        If data > 0.99 Then
+            data = 0.99
+        End If
+        If data < 0 Then
+            data = 0
+        End If
+        ProgramWord = (data * 2 ^ 15)
+        ProgramHB = Int(ProgramWord / 256)
+        ProgramLB = ProgramWord Mod 256
+        SendAndValidateCommand(CMD_SET_PID, RAM_READ_PID_I_COEF, ProgramHB, ProgramLB)
+
+        data = TextBoxDCoeff.Text
+        If data > 0.99 Then
+            data = 0.99
+        End If
+        If data < 0 Then
+            data = 0
+        End If
+        ProgramWord = (data * 2 ^ 15)
+        ProgramHB = Int(ProgramWord / 256)
+        ProgramLB = ProgramWord Mod 256
+        SendAndValidateCommand(CMD_SET_PID, RAM_READ_PID_D_COEF, ProgramHB, ProgramLB)
+
+        ReadPID()
+
     End Sub
 End Class

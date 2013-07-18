@@ -152,6 +152,14 @@ Partial Class Form1
         Me.TextPowerLevel = New System.Windows.Forms.TextBox()
         Me.ButtonSetPwrLevel = New System.Windows.Forms.Button()
         Me.ButtonReset = New System.Windows.Forms.Button()
+        Me.TextBoxPCoeff = New System.Windows.Forms.TextBox()
+        Me.TextBoxICoeff = New System.Windows.Forms.TextBox()
+        Me.TextBoxDCoeff = New System.Windows.Forms.TextBox()
+        Me.ButtonWritePID = New System.Windows.Forms.Button()
+        Me.ButtonReadPID = New System.Windows.Forms.Button()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'SerialPortETM
@@ -164,7 +172,7 @@ Partial Class Form1
         'LabelComMsg
         '
         Me.LabelComMsg.AutoSize = True
-        Me.LabelComMsg.Location = New System.Drawing.Point(12, 323)
+        Me.LabelComMsg.Location = New System.Drawing.Point(666, 345)
         Me.LabelComMsg.Name = "LabelComMsg"
         Me.LabelComMsg.Size = New System.Drawing.Size(98, 13)
         Me.LabelComMsg.TabIndex = 1
@@ -173,7 +181,7 @@ Partial Class Form1
         'ComboBoxComPorts
         '
         Me.ComboBoxComPorts.FormattingEnabled = True
-        Me.ComboBoxComPorts.Location = New System.Drawing.Point(15, 339)
+        Me.ComboBoxComPorts.Location = New System.Drawing.Point(650, 361)
         Me.ComboBoxComPorts.Name = "ComboBoxComPorts"
         Me.ComboBoxComPorts.Size = New System.Drawing.Size(114, 21)
         Me.ComboBoxComPorts.TabIndex = 6
@@ -953,7 +961,7 @@ Partial Class Form1
         '
         'ButtonSetBaudRate
         '
-        Me.ButtonSetBaudRate.Location = New System.Drawing.Point(15, 391)
+        Me.ButtonSetBaudRate.Location = New System.Drawing.Point(650, 413)
         Me.ButtonSetBaudRate.Name = "ButtonSetBaudRate"
         Me.ButtonSetBaudRate.Size = New System.Drawing.Size(114, 23)
         Me.ButtonSetBaudRate.TabIndex = 841
@@ -962,7 +970,7 @@ Partial Class Form1
         '
         'TextBoxBaudRate
         '
-        Me.TextBoxBaudRate.Location = New System.Drawing.Point(15, 365)
+        Me.TextBoxBaudRate.Location = New System.Drawing.Point(650, 387)
         Me.TextBoxBaudRate.Name = "TextBoxBaudRate"
         Me.TextBoxBaudRate.Size = New System.Drawing.Size(114, 20)
         Me.TextBoxBaudRate.TabIndex = 840
@@ -1262,7 +1270,7 @@ Partial Class Form1
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(582, 323)
+        Me.Label2.Location = New System.Drawing.Point(247, 257)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(70, 13)
         Me.Label2.TabIndex = 879
@@ -1271,7 +1279,7 @@ Partial Class Form1
         'LabelScaleError
         '
         Me.LabelScaleError.AutoSize = True
-        Me.LabelScaleError.Location = New System.Drawing.Point(718, 352)
+        Me.LabelScaleError.Location = New System.Drawing.Point(383, 286)
         Me.LabelScaleError.Name = "LabelScaleError"
         Me.LabelScaleError.Size = New System.Drawing.Size(10, 13)
         Me.LabelScaleError.TabIndex = 883
@@ -1280,7 +1288,7 @@ Partial Class Form1
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(582, 352)
+        Me.Label20.Location = New System.Drawing.Point(247, 286)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(64, 13)
         Me.Label20.TabIndex = 882
@@ -1289,7 +1297,7 @@ Partial Class Form1
         'LabelOverReverseCount
         '
         Me.LabelOverReverseCount.AutoSize = True
-        Me.LabelOverReverseCount.Location = New System.Drawing.Point(718, 339)
+        Me.LabelOverReverseCount.Location = New System.Drawing.Point(383, 273)
         Me.LabelOverReverseCount.Name = "LabelOverReverseCount"
         Me.LabelOverReverseCount.Size = New System.Drawing.Size(10, 13)
         Me.LabelOverReverseCount.TabIndex = 881
@@ -1298,7 +1306,7 @@ Partial Class Form1
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(582, 339)
+        Me.Label22.Location = New System.Drawing.Point(247, 273)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(104, 13)
         Me.Label22.TabIndex = 880
@@ -1307,7 +1315,7 @@ Partial Class Form1
         'LabelLTC2656Errors
         '
         Me.LabelLTC2656Errors.AutoSize = True
-        Me.LabelLTC2656Errors.Location = New System.Drawing.Point(718, 365)
+        Me.LabelLTC2656Errors.Location = New System.Drawing.Point(383, 299)
         Me.LabelLTC2656Errors.Name = "LabelLTC2656Errors"
         Me.LabelLTC2656Errors.Size = New System.Drawing.Size(10, 13)
         Me.LabelLTC2656Errors.TabIndex = 885
@@ -1316,7 +1324,7 @@ Partial Class Form1
         'Label20x
         '
         Me.Label20x.AutoSize = True
-        Me.Label20x.Location = New System.Drawing.Point(582, 365)
+        Me.Label20x.Location = New System.Drawing.Point(247, 299)
         Me.Label20x.Name = "Label20x"
         Me.Label20x.Size = New System.Drawing.Size(81, 13)
         Me.Label20x.TabIndex = 884
@@ -1325,7 +1333,7 @@ Partial Class Form1
         'LabelWatch1
         '
         Me.LabelWatch1.AutoSize = True
-        Me.LabelWatch1.Location = New System.Drawing.Point(718, 401)
+        Me.LabelWatch1.Location = New System.Drawing.Point(383, 335)
         Me.LabelWatch1.Name = "LabelWatch1"
         Me.LabelWatch1.Size = New System.Drawing.Size(10, 13)
         Me.LabelWatch1.TabIndex = 887
@@ -1334,7 +1342,7 @@ Partial Class Form1
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(582, 401)
+        Me.Label21.Location = New System.Drawing.Point(247, 335)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(48, 13)
         Me.Label21.TabIndex = 886
@@ -1343,7 +1351,7 @@ Partial Class Form1
         'LabelWatch2
         '
         Me.LabelWatch2.AutoSize = True
-        Me.LabelWatch2.Location = New System.Drawing.Point(718, 414)
+        Me.LabelWatch2.Location = New System.Drawing.Point(383, 348)
         Me.LabelWatch2.Name = "LabelWatch2"
         Me.LabelWatch2.Size = New System.Drawing.Size(10, 13)
         Me.LabelWatch2.TabIndex = 889
@@ -1352,7 +1360,7 @@ Partial Class Form1
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(582, 414)
+        Me.Label24.Location = New System.Drawing.Point(247, 348)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(48, 13)
         Me.Label24.TabIndex = 888
@@ -1362,7 +1370,7 @@ Partial Class Form1
         'LabelWatch4
         '
         Me.LabelWatch4.AutoSize = True
-        Me.LabelWatch4.Location = New System.Drawing.Point(718, 440)
+        Me.LabelWatch4.Location = New System.Drawing.Point(383, 374)
         Me.LabelWatch4.Name = "LabelWatch4"
         Me.LabelWatch4.Size = New System.Drawing.Size(10, 13)
         Me.LabelWatch4.TabIndex = 893
@@ -1371,7 +1379,7 @@ Partial Class Form1
         'Label26
         '
         Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(582, 440)
+        Me.Label26.Location = New System.Drawing.Point(247, 374)
         Me.Label26.Name = "Label26"
         Me.Label26.Size = New System.Drawing.Size(48, 13)
         Me.Label26.TabIndex = 892
@@ -1380,7 +1388,7 @@ Partial Class Form1
         'LabelWatch3
         '
         Me.LabelWatch3.AutoSize = True
-        Me.LabelWatch3.Location = New System.Drawing.Point(718, 427)
+        Me.LabelWatch3.Location = New System.Drawing.Point(383, 361)
         Me.LabelWatch3.Name = "LabelWatch3"
         Me.LabelWatch3.Size = New System.Drawing.Size(10, 13)
         Me.LabelWatch3.TabIndex = 891
@@ -1389,7 +1397,7 @@ Partial Class Form1
         'Label29
         '
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(582, 427)
+        Me.Label29.Location = New System.Drawing.Point(247, 361)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(48, 13)
         Me.Label29.TabIndex = 890
@@ -1420,11 +1428,85 @@ Partial Class Form1
         Me.ButtonReset.Text = "Fault Reset"
         Me.ButtonReset.UseVisualStyleBackColor = True
         '
+        'TextBoxPCoeff
+        '
+        Me.TextBoxPCoeff.Location = New System.Drawing.Point(15, 336)
+        Me.TextBoxPCoeff.Name = "TextBoxPCoeff"
+        Me.TextBoxPCoeff.Size = New System.Drawing.Size(64, 20)
+        Me.TextBoxPCoeff.TabIndex = 897
+        '
+        'TextBoxICoeff
+        '
+        Me.TextBoxICoeff.Location = New System.Drawing.Point(15, 361)
+        Me.TextBoxICoeff.Name = "TextBoxICoeff"
+        Me.TextBoxICoeff.Size = New System.Drawing.Size(64, 20)
+        Me.TextBoxICoeff.TabIndex = 898
+        '
+        'TextBoxDCoeff
+        '
+        Me.TextBoxDCoeff.Location = New System.Drawing.Point(15, 387)
+        Me.TextBoxDCoeff.Name = "TextBoxDCoeff"
+        Me.TextBoxDCoeff.Size = New System.Drawing.Size(64, 20)
+        Me.TextBoxDCoeff.TabIndex = 899
+        '
+        'ButtonWritePID
+        '
+        Me.ButtonWritePID.Location = New System.Drawing.Point(15, 442)
+        Me.ButtonWritePID.Name = "ButtonWritePID"
+        Me.ButtonWritePID.Size = New System.Drawing.Size(104, 23)
+        Me.ButtonWritePID.TabIndex = 900
+        Me.ButtonWritePID.Text = "Write New PID"
+        Me.ButtonWritePID.UseVisualStyleBackColor = True
+        '
+        'ButtonReadPID
+        '
+        Me.ButtonReadPID.Location = New System.Drawing.Point(15, 413)
+        Me.ButtonReadPID.Name = "ButtonReadPID"
+        Me.ButtonReadPID.Size = New System.Drawing.Size(104, 23)
+        Me.ButtonReadPID.TabIndex = 901
+        Me.ButtonReadPID.Text = "Read PID"
+        Me.ButtonReadPID.UseVisualStyleBackColor = True
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(85, 338)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(14, 13)
+        Me.Label19.TabIndex = 902
+        Me.Label19.Text = "P"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(85, 364)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(10, 13)
+        Me.Label23.TabIndex = 903
+        Me.Label23.Text = "I"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(85, 390)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(15, 13)
+        Me.Label25.TabIndex = 904
+        Me.Label25.Text = "D"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(849, 520)
+        Me.Controls.Add(Me.Label25)
+        Me.Controls.Add(Me.Label23)
+        Me.Controls.Add(Me.Label19)
+        Me.Controls.Add(Me.ButtonReadPID)
+        Me.Controls.Add(Me.ButtonWritePID)
+        Me.Controls.Add(Me.TextBoxDCoeff)
+        Me.Controls.Add(Me.TextBoxICoeff)
+        Me.Controls.Add(Me.TextBoxPCoeff)
         Me.Controls.Add(Me.ButtonReset)
         Me.Controls.Add(Me.ButtonSetPwrLevel)
         Me.Controls.Add(Me.TextPowerLevel)
@@ -1686,5 +1768,13 @@ Partial Class Form1
     Friend WithEvents TextPowerLevel As System.Windows.Forms.TextBox
     Friend WithEvents ButtonSetPwrLevel As System.Windows.Forms.Button
     Friend WithEvents ButtonReset As System.Windows.Forms.Button
+    Friend WithEvents TextBoxPCoeff As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxICoeff As System.Windows.Forms.TextBox
+    Friend WithEvents TextBoxDCoeff As System.Windows.Forms.TextBox
+    Friend WithEvents ButtonWritePID As System.Windows.Forms.Button
+    Friend WithEvents ButtonReadPID As System.Windows.Forms.Button
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Label25 As System.Windows.Forms.Label
 
 End Class
