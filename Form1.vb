@@ -6,6 +6,7 @@ Public Class Form1
     Dim autostep As UInt16
     Dim autointerval As Integer
     Dim power_ramp As UInt16
+    Dim power_ramp_dan_state As Integer
 
     Public ReturnData As UInt16
     Dim ComError As Boolean
@@ -826,9 +827,15 @@ Public Class Form1
         power_ramp = 0
 
         ButtonSetPwrLevel.Enabled = False
+
         TextBoxStep.Enabled = False
         TextBoxInterval.Enabled = False
         ButtonStartTest.Enabled = False
+
+        TextBoxIntervalDan.Enabled = False
+        ButtonStartDan.Enabled = False
+        ButtonStopDan.Enabled = False
+
 
         Timer3.Interval = autointerval
         Timer3.Enabled = True
@@ -871,7 +878,91 @@ Public Class Form1
         TextBoxStep.Enabled = True
         TextBoxInterval.Enabled = True
         ButtonStartTest.Enabled = True
+
+        TextBoxIntervalDan.Enabled = True
+        ButtonStartDan.Enabled = True
+        ButtonStopDan.Enabled = True
+
         Timer3.Enabled = False
 
+    End Sub
+
+
+
+    Private Sub ButtonStartDan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStartDan.Click
+        ButtonSetPwrLevel.Enabled = False
+
+        TextBoxStep.Enabled = False
+        TextBoxInterval.Enabled = False
+        ButtonStartTest.Enabled = False
+        Button3.Enabled = False
+
+        ButtonStartDan.Enabled = False
+        TextBoxIntervalDan.Enabled = False
+
+        power_ramp_dan_state = 0
+        Timer4.Interval = (TextBoxIntervalDan.Text * 1000)
+        Timer4.Enabled = True
+    End Sub
+
+
+
+
+    Private Sub Timer4_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer4.Tick
+        Dim ProgramWord As UInt16
+        Dim ProgramHB As Byte
+        Dim ProgramLB As Byte
+
+
+        If power_ramp_dan_state = 0 Then
+            ProgramWord = 5000
+        ElseIf power_ramp_dan_state = 1 Then
+            ProgramWord = 0
+        ElseIf power_ramp_dan_state = 2 Then
+            ProgramWord = 10000
+        ElseIf power_ramp_dan_state = 3 Then
+            ProgramWord = 0
+        ElseIf power_ramp_dan_state = 4 Then
+            ProgramWord = 20000
+        ElseIf power_ramp_dan_state = 4 Then
+            ProgramWord = 0
+        ElseIf power_ramp_dan_state = 6 Then
+            ProgramWord = 35000
+        ElseIf power_ramp_dan_state = 7 Then
+            ProgramWord = 0
+        ElseIf power_ramp_dan_state = 8 Then
+            ProgramWord = 50000
+        ElseIf power_ramp_dan_state = 9 Then
+            ProgramWord = 0
+        End If
+
+        power_ramp_dan_state += 1
+        If power_ramp_dan_state > 9 Then
+            power_ramp_dan_state = 0
+
+        End If
+
+        ProgramHB = Int(ProgramWord / 256)
+        ProgramLB = ProgramWord Mod 256
+
+        If SendAndValidateCommand(CMD_SET_TARGET_POWER, 0, ProgramHB, ProgramLB) = True Then
+            ' the command Succeded
+        Else
+            MsgBox("Set Power Level Command Failed")
+        End If
+    End Sub
+
+    Private Sub ButtonStopDan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStopDan.Click
+        ButtonSetPwrLevel.Enabled = True
+        TextBoxStep.Enabled = True
+        TextBoxInterval.Enabled = True
+        ButtonStartTest.Enabled = True
+        Button3.Enabled = True
+        ButtonStartDan.Enabled = True
+        TextBoxIntervalDan.Enabled = True
+
+        power_ramp_dan_state = 0
+        Timer4.Interval = (TextBoxIntervalDan.Text * 1000)
+        Timer4.Enabled = False
     End Sub
 End Class

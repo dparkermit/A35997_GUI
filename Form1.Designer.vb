@@ -167,6 +167,13 @@ Partial Class Form1
         Me.ButtonStartTest = New System.Windows.Forms.Button()
         Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
         Me.Button3 = New System.Windows.Forms.Button()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.ButtonStopDan = New System.Windows.Forms.Button()
+        Me.ButtonStartDan = New System.Windows.Forms.Button()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.TextBoxIntervalDan = New System.Windows.Forms.TextBox()
+        Me.Timer4 = New System.Windows.Forms.Timer(Me.components)
         Me.SuspendLayout()
         '
         'SerialPortETM
@@ -179,7 +186,7 @@ Partial Class Form1
         'LabelComMsg
         '
         Me.LabelComMsg.AutoSize = True
-        Me.LabelComMsg.Location = New System.Drawing.Point(704, 348)
+        Me.LabelComMsg.Location = New System.Drawing.Point(247, 413)
         Me.LabelComMsg.Name = "LabelComMsg"
         Me.LabelComMsg.Size = New System.Drawing.Size(98, 13)
         Me.LabelComMsg.TabIndex = 1
@@ -188,7 +195,7 @@ Partial Class Form1
         'ComboBoxComPorts
         '
         Me.ComboBoxComPorts.FormattingEnabled = True
-        Me.ComboBoxComPorts.Location = New System.Drawing.Point(707, 364)
+        Me.ComboBoxComPorts.Location = New System.Drawing.Point(250, 429)
         Me.ComboBoxComPorts.Name = "ComboBoxComPorts"
         Me.ComboBoxComPorts.Size = New System.Drawing.Size(114, 21)
         Me.ComboBoxComPorts.TabIndex = 6
@@ -968,7 +975,7 @@ Partial Class Form1
         '
         'ButtonSetBaudRate
         '
-        Me.ButtonSetBaudRate.Location = New System.Drawing.Point(707, 416)
+        Me.ButtonSetBaudRate.Location = New System.Drawing.Point(250, 481)
         Me.ButtonSetBaudRate.Name = "ButtonSetBaudRate"
         Me.ButtonSetBaudRate.Size = New System.Drawing.Size(114, 23)
         Me.ButtonSetBaudRate.TabIndex = 841
@@ -977,7 +984,7 @@ Partial Class Form1
         '
         'TextBoxBaudRate
         '
-        Me.TextBoxBaudRate.Location = New System.Drawing.Point(707, 390)
+        Me.TextBoxBaudRate.Location = New System.Drawing.Point(250, 455)
         Me.TextBoxBaudRate.Name = "TextBoxBaudRate"
         Me.TextBoxBaudRate.Size = New System.Drawing.Size(114, 20)
         Me.TextBoxBaudRate.TabIndex = 840
@@ -1503,7 +1510,7 @@ Partial Class Form1
         '
         'TextBoxStep
         '
-        Me.TextBoxStep.Location = New System.Drawing.Point(422, 419)
+        Me.TextBoxStep.Location = New System.Drawing.Point(431, 413)
         Me.TextBoxStep.Name = "TextBoxStep"
         Me.TextBoxStep.Size = New System.Drawing.Size(64, 20)
         Me.TextBoxStep.TabIndex = 905
@@ -1511,7 +1518,7 @@ Partial Class Form1
         'Label27
         '
         Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(503, 426)
+        Me.Label27.Location = New System.Drawing.Point(512, 420)
         Me.Label27.Name = "Label27"
         Me.Label27.Size = New System.Drawing.Size(60, 13)
         Me.Label27.TabIndex = 906
@@ -1520,7 +1527,7 @@ Partial Class Form1
         'Label30
         '
         Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(503, 452)
+        Me.Label30.Location = New System.Drawing.Point(512, 446)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(90, 13)
         Me.Label30.TabIndex = 908
@@ -1528,14 +1535,14 @@ Partial Class Form1
         '
         'TextBoxInterval
         '
-        Me.TextBoxInterval.Location = New System.Drawing.Point(422, 445)
+        Me.TextBoxInterval.Location = New System.Drawing.Point(431, 439)
         Me.TextBoxInterval.Name = "TextBoxInterval"
         Me.TextBoxInterval.Size = New System.Drawing.Size(64, 20)
         Me.TextBoxInterval.TabIndex = 907
         '
         'ButtonStartTest
         '
-        Me.ButtonStartTest.Location = New System.Drawing.Point(422, 471)
+        Me.ButtonStartTest.Location = New System.Drawing.Point(431, 465)
         Me.ButtonStartTest.Name = "ButtonStartTest"
         Me.ButtonStartTest.Size = New System.Drawing.Size(104, 23)
         Me.ButtonStartTest.TabIndex = 909
@@ -1548,18 +1555,82 @@ Partial Class Form1
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(532, 471)
+        Me.Button3.Location = New System.Drawing.Point(431, 494)
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(104, 23)
         Me.Button3.TabIndex = 910
         Me.Button3.Text = "Stop Test"
         Me.Button3.UseVisualStyleBackColor = True
         '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label31.Location = New System.Drawing.Point(428, 387)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(63, 13)
+        Me.Label31.TabIndex = 911
+        Me.Label31.Text = "Auto Step"
+        '
+        'Label32
+        '
+        Me.Label32.AutoSize = True
+        Me.Label32.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label32.Location = New System.Drawing.Point(639, 387)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(116, 13)
+        Me.Label32.TabIndex = 918
+        Me.Label32.Text = "Test Pattern ""Dan"""
+        '
+        'ButtonStopDan
+        '
+        Me.ButtonStopDan.Location = New System.Drawing.Point(642, 494)
+        Me.ButtonStopDan.Name = "ButtonStopDan"
+        Me.ButtonStopDan.Size = New System.Drawing.Size(104, 23)
+        Me.ButtonStopDan.TabIndex = 917
+        Me.ButtonStopDan.Text = "Stop Test"
+        Me.ButtonStopDan.UseVisualStyleBackColor = True
+        '
+        'ButtonStartDan
+        '
+        Me.ButtonStartDan.Location = New System.Drawing.Point(642, 465)
+        Me.ButtonStartDan.Name = "ButtonStartDan"
+        Me.ButtonStartDan.Size = New System.Drawing.Size(104, 23)
+        Me.ButtonStartDan.TabIndex = 916
+        Me.ButtonStartDan.Text = "Start Test"
+        Me.ButtonStartDan.UseVisualStyleBackColor = True
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(723, 446)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(90, 13)
+        Me.Label33.TabIndex = 915
+        Me.Label33.Text = "Inverval Seconds"
+        '
+        'TextBoxIntervalDan
+        '
+        Me.TextBoxIntervalDan.Location = New System.Drawing.Point(642, 439)
+        Me.TextBoxIntervalDan.Name = "TextBoxIntervalDan"
+        Me.TextBoxIntervalDan.Size = New System.Drawing.Size(64, 20)
+        Me.TextBoxIntervalDan.TabIndex = 914
+        '
+        'Timer4
+        '
+        Me.Timer4.Interval = 60000
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(849, 520)
+        Me.Controls.Add(Me.Label32)
+        Me.Controls.Add(Me.ButtonStopDan)
+        Me.Controls.Add(Me.ButtonStartDan)
+        Me.Controls.Add(Me.Label33)
+        Me.Controls.Add(Me.TextBoxIntervalDan)
+        Me.Controls.Add(Me.Label31)
         Me.Controls.Add(Me.Button3)
         Me.Controls.Add(Me.ButtonStartTest)
         Me.Controls.Add(Me.Label30)
@@ -1850,5 +1921,12 @@ Partial Class Form1
     Friend WithEvents ButtonStartTest As System.Windows.Forms.Button
     Friend WithEvents Timer3 As System.Windows.Forms.Timer
     Friend WithEvents Button3 As System.Windows.Forms.Button
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents Label32 As System.Windows.Forms.Label
+    Friend WithEvents ButtonStopDan As System.Windows.Forms.Button
+    Friend WithEvents ButtonStartDan As System.Windows.Forms.Button
+    Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents TextBoxIntervalDan As System.Windows.Forms.TextBox
+    Friend WithEvents Timer4 As System.Windows.Forms.Timer
 
 End Class
