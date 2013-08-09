@@ -3,6 +3,10 @@
 'Imports System.Collections
 
 Public Class Form1
+    Dim autostep As UInt16
+    Dim autointerval As Integer
+    Dim power_ramp As UInt16
+
     Public ReturnData As UInt16
     Dim ComError As Boolean
     Dim Timer1Tic As Boolean = False
@@ -13,7 +17,9 @@ Public Class Form1
     Public Const SYNC_3_SEND As Byte = &HF3
     Public Const SYNC_3_RECIEVE As Byte = &HF4
     Public Const COMMAND_LENGTH As Byte = 9
-
+    Dim fileName As String
+    Dim filePath As String
+    Dim file As System.IO.StreamWriter
 
 
     'Commands
@@ -80,6 +86,27 @@ Public Class Form1
             ComboBoxComPorts.Items.Add(sp)
         Next
 
+
+        fileName = "ETM_Lund_Log_" & DateTime.Now.ToString("yyyy_MM_dd_HH_mm") & ".csv"
+        filePath = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, fileName)
+        file = My.Computer.FileSystem.OpenTextFileWriter(filePath, True)
+        file.Write("Time , ")
+        file.Write("State , ")
+        file.Write("Target Power , ")
+        file.Write("Fwd A Power , ")
+        file.Write("Fwd B Power, ")
+        file.Write("Pid Dac Out , ")
+        file.Write("RF Amp Temp , ")
+        file.WriteLine("")
+        file.Close()
+
+
+
+
+
+
+
+
         TextBoxBaudRate.Text = My.Settings.SelectedBaudRate
 
         Try
@@ -112,7 +139,7 @@ Public Class Form1
 
         Try
             SerialPortETM.PortName = My.Settings.SelectedComPortString
-            SerialPortETM.ReadTimeout = 100
+            SerialPortETM.ReadTimeout = 25
             SerialPortETM.BaudRate = My.Settings.SelectedBaudRate
 
         Catch ex As Exception
@@ -177,7 +204,7 @@ Public Class Form1
 
 
 
-        LabelComMsg.Text = "-"
+        'LabelComMsg.Text = "-"
 
         Try
             If SerialPortETM.IsOpen = False Then
@@ -258,6 +285,8 @@ Public Class Form1
 
 
     Private Sub ReadAllFromRam()
+        LabelTime.Text = DateTime.Now
+
         'Read Control State
         If SendAndValidateCommand(CMD_READ_RAM_VALUE, RAM_READ_STATE, 0, 0) = True Then
             If ReturnData = &H1 Then
@@ -277,6 +306,7 @@ Public Class Form1
             End If
         Else
             LabelState.Text = "error"
+            Exit Sub
         End If
 
 
@@ -423,10 +453,7 @@ Public Class Form1
             LabelWatch4.Text = "error"
         End If
 
-
-        LabelTime.Text = DateTime.Now
-
-
+        ReadAllFaults()
 
     End Sub
 
@@ -622,16 +649,20 @@ Public Class Form1
     End Sub
 
     Private Sub WriteToLogFile()
-        ' Dim filePath As String
-        ' filePath = System.IO.Path.Combine(My.Computer.FileSystem.SpecialDirectories.MyDocuments, "ETM_Lund_Log.csv")
-        ' Dim file As System.IO.StreamWriter
-        ' file = My.Computer.FileSystem.OpenTextFileWriter(filePath, True)
-        ' file.Write(LabelTime.Text & " , ")
-        ' file.Write(LabelState.Text & " , ")
+
+        file = My.Computer.FileSystem.OpenTextFileWriter(filePath, True)
+        file.Write(LabelTime.Text & " , ")
+        file.Write(LabelState.Text & " , ")
+        file.Write(LabelTargetPower.Text & " , ")
+        file.Write(LabelFwdAPower.Text & " , ")
+        file.Write(LabelFwdBPower.Text & " , ")
+        file.Write(LabelDacOut.Text & " , ")
+        file.Write(LabelRFAmpTemp.Text & " , ")
+        file.WriteLine("")
+        file.Close()
     End Sub
 
     Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-        ReadAllFaults()
         ReadAllFromRam()
     End Sub
 
@@ -639,7 +670,7 @@ Public Class Form1
         WriteToLogFile()
     End Sub
 
-   
+
 
     Private Sub ButtonSetBaudRate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonSetBaudRate.Click
 
@@ -667,7 +698,6 @@ Public Class Form1
     End Sub
 
     Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button1.Click
-        ReadAllFaults()
         ReadAllFromRam()
     End Sub
 
@@ -786,6 +816,62 @@ Public Class Form1
         SendAndValidateCommand(CMD_SET_PID, RAM_READ_PID_D_COEF, ProgramHB, ProgramLB)
 
         ReadPID()
+
+    End Sub
+
+
+    Private Sub ButtonStartTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonStartTest.Click
+        autostep = (TextBoxStep.Text * 100)
+        autointerval = (TextBoxInterval.Text * 1000)
+        power_ramp = 0
+
+        ButtonSetPwrLevel.Enabled = False
+        TextBoxStep.Enabled = False
+        TextBoxInterval.Enabled = False
+        ButtonStartTest.Enabled = False
+
+        Timer3.Interval = autointerval
+        Timer3.Enabled = True
+
+    End Sub
+
+    Private Sub Timer3_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer3.Tick
+        Dim temp As Integer
+        Dim ProgramWord As UInt16
+        Dim ProgramHB As Byte
+        Dim ProgramLB As Byte
+
+
+
+
+        ProgramWord = power_ramp
+        ProgramHB = Int(ProgramWord / 256)
+        ProgramLB = ProgramWord Mod 256
+
+        If SendAndValidateCommand(CMD_SET_TARGET_POWER, 0, ProgramHB, ProgramLB) = True Then
+            ' the command Succeded
+        Else
+            MsgBox("Set Power Level Command Failed")
+        End If
+
+        temp = power_ramp
+        temp += autostep
+
+
+        If temp > 52000 Then
+            temp = 0
+        End If
+
+        power_ramp = temp
+
+    End Sub
+
+    Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button3.Click
+        ButtonSetPwrLevel.Enabled = True
+        TextBoxStep.Enabled = True
+        TextBoxInterval.Enabled = True
+        ButtonStartTest.Enabled = True
+        Timer3.Enabled = False
 
     End Sub
 End Class

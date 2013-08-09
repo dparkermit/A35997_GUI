@@ -160,6 +160,13 @@ Partial Class Form1
         Me.Label19 = New System.Windows.Forms.Label()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label25 = New System.Windows.Forms.Label()
+        Me.TextBoxStep = New System.Windows.Forms.TextBox()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.TextBoxInterval = New System.Windows.Forms.TextBox()
+        Me.ButtonStartTest = New System.Windows.Forms.Button()
+        Me.Timer3 = New System.Windows.Forms.Timer(Me.components)
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'SerialPortETM
@@ -172,7 +179,7 @@ Partial Class Form1
         'LabelComMsg
         '
         Me.LabelComMsg.AutoSize = True
-        Me.LabelComMsg.Location = New System.Drawing.Point(666, 345)
+        Me.LabelComMsg.Location = New System.Drawing.Point(704, 348)
         Me.LabelComMsg.Name = "LabelComMsg"
         Me.LabelComMsg.Size = New System.Drawing.Size(98, 13)
         Me.LabelComMsg.TabIndex = 1
@@ -181,7 +188,7 @@ Partial Class Form1
         'ComboBoxComPorts
         '
         Me.ComboBoxComPorts.FormattingEnabled = True
-        Me.ComboBoxComPorts.Location = New System.Drawing.Point(650, 361)
+        Me.ComboBoxComPorts.Location = New System.Drawing.Point(707, 364)
         Me.ComboBoxComPorts.Name = "ComboBoxComPorts"
         Me.ComboBoxComPorts.Size = New System.Drawing.Size(114, 21)
         Me.ComboBoxComPorts.TabIndex = 6
@@ -961,7 +968,7 @@ Partial Class Form1
         '
         'ButtonSetBaudRate
         '
-        Me.ButtonSetBaudRate.Location = New System.Drawing.Point(650, 413)
+        Me.ButtonSetBaudRate.Location = New System.Drawing.Point(707, 416)
         Me.ButtonSetBaudRate.Name = "ButtonSetBaudRate"
         Me.ButtonSetBaudRate.Size = New System.Drawing.Size(114, 23)
         Me.ButtonSetBaudRate.TabIndex = 841
@@ -970,7 +977,7 @@ Partial Class Form1
         '
         'TextBoxBaudRate
         '
-        Me.TextBoxBaudRate.Location = New System.Drawing.Point(650, 387)
+        Me.TextBoxBaudRate.Location = New System.Drawing.Point(707, 390)
         Me.TextBoxBaudRate.Name = "TextBoxBaudRate"
         Me.TextBoxBaudRate.Size = New System.Drawing.Size(114, 20)
         Me.TextBoxBaudRate.TabIndex = 840
@@ -1494,11 +1501,71 @@ Partial Class Form1
         Me.Label25.TabIndex = 904
         Me.Label25.Text = "D"
         '
+        'TextBoxStep
+        '
+        Me.TextBoxStep.Location = New System.Drawing.Point(422, 419)
+        Me.TextBoxStep.Name = "TextBoxStep"
+        Me.TextBoxStep.Size = New System.Drawing.Size(64, 20)
+        Me.TextBoxStep.TabIndex = 905
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(503, 426)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(60, 13)
+        Me.Label27.TabIndex = 906
+        Me.Label27.Text = "Step Watts"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(503, 452)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(90, 13)
+        Me.Label30.TabIndex = 908
+        Me.Label30.Text = "Inverval Seconds"
+        '
+        'TextBoxInterval
+        '
+        Me.TextBoxInterval.Location = New System.Drawing.Point(422, 445)
+        Me.TextBoxInterval.Name = "TextBoxInterval"
+        Me.TextBoxInterval.Size = New System.Drawing.Size(64, 20)
+        Me.TextBoxInterval.TabIndex = 907
+        '
+        'ButtonStartTest
+        '
+        Me.ButtonStartTest.Location = New System.Drawing.Point(422, 471)
+        Me.ButtonStartTest.Name = "ButtonStartTest"
+        Me.ButtonStartTest.Size = New System.Drawing.Size(104, 23)
+        Me.ButtonStartTest.TabIndex = 909
+        Me.ButtonStartTest.Text = "Start Test"
+        Me.ButtonStartTest.UseVisualStyleBackColor = True
+        '
+        'Timer3
+        '
+        Me.Timer3.Interval = 60000
+        '
+        'Button3
+        '
+        Me.Button3.Location = New System.Drawing.Point(532, 471)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(104, 23)
+        Me.Button3.TabIndex = 910
+        Me.Button3.Text = "Stop Test"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(849, 520)
+        Me.Controls.Add(Me.Button3)
+        Me.Controls.Add(Me.ButtonStartTest)
+        Me.Controls.Add(Me.Label30)
+        Me.Controls.Add(Me.TextBoxInterval)
+        Me.Controls.Add(Me.Label27)
+        Me.Controls.Add(Me.TextBoxStep)
         Me.Controls.Add(Me.Label25)
         Me.Controls.Add(Me.Label23)
         Me.Controls.Add(Me.Label19)
@@ -1776,5 +1843,12 @@ Partial Class Form1
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents Label23 As System.Windows.Forms.Label
     Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents TextBoxStep As System.Windows.Forms.TextBox
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents TextBoxInterval As System.Windows.Forms.TextBox
+    Friend WithEvents ButtonStartTest As System.Windows.Forms.Button
+    Friend WithEvents Timer3 As System.Windows.Forms.Timer
+    Friend WithEvents Button3 As System.Windows.Forms.Button
 
 End Class
