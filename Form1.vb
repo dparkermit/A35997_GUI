@@ -10,7 +10,7 @@ Public Class Form1
 
     Public ReturnData As UInt16
     Dim ComError As Boolean
-    Dim Timer1Tic As Boolean = False
+    Dim `Tic As Boolean = False
     Dim SerialCommandTransmitBuffer(9) As Byte
     Dim SerialCommandReceiveBuffer(9) As Byte
     Public Const SYNC_1 As Byte = &HF1
